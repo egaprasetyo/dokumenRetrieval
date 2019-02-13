@@ -20,6 +20,11 @@ public class Document {
         this.content = content;
     }
 
+    public Document(int id, String content) {
+        this.id = id;
+        this.content = content;
+    } 
+
     /**
      * @return the content
      */
