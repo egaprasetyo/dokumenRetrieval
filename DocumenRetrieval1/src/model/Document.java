@@ -54,7 +54,11 @@ public class Document {
     }
     
     public String[] getListofTerm(){
-        return null;
+        String[] term = content.split("\\s+");
+        for (int i = 0; i < term.length; i++) {
+            term[i] = term[i].replaceAll("[^\\w]", "");
+        }
+        return term;
     }
     
 }
