@@ -11,12 +11,10 @@ import model.Document;
  *
  * @author admin
  */
-public class testDocument {
+public class testDocument1 {
     public static void main(String[] args) {
-        Document doc1 = new Document(1 , "computer information retrieval");
-        Document doc2 = new Document(2 , "computer retrieval");
-        Document doc3 = new Document(3 , "information");
-        Document doc4 = new Document(4 , "computer information");
+        Document doc1 = new Document(1, "computer information retrieval");
+        Document doc2 = new Document(2, "computer oraganization and architecture");
         
         String result[] = doc1.getListofTerm();
         for (int i = 0; i < result.length; i++) {
