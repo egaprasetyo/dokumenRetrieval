@@ -7,7 +7,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-//import java.util.function.Consumer;
 
 /**
  *
@@ -46,6 +45,6 @@ public class InvertedIndex {
     }
 
     public void makeDictionary() {
-
+        
     }
 }
