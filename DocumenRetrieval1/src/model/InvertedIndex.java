@@ -23,7 +23,6 @@ public class InvertedIndex {
     public void addNewDocument(Document document) {
         getListofDocument().add(document);
     }
-    
 
     public ArrayList<Posting> getUnsortedPostingList() {
         ArrayList<Posting> list = new ArrayList<Posting>();
@@ -48,19 +47,19 @@ public class InvertedIndex {
     public void makeDictionary() {
         ArrayList<Posting> list = getSortedPostingList();
         for (int i = 0; i < list.size(); i++) {
-            if(getDictionary().isEmpty()){
+            if (getDictionary().isEmpty()) {
                 Term term = new Term(list.get(i).getTerm());
                 term.getPostingList().add(list.get(i));
                 getDictionary().add(term);
-            } else{
+            } else {
                 Term tempTerm = new Term(list.get(i).getTerm());
                 int position = Collections.binarySearch(getDictionary(), tempTerm); //keluar berupa index posisinya
                 //kalo hasil position -1 maka tidak ada
-                if(position < 0){
+                if (position < 0) {
                     //term baru
                     tempTerm.getPostingList().add(list.get(i));
                     getDictionary().add(tempTerm);
-                } else{
+                } else {
                     getDictionary().get(position).getPostingList().add(list.get(i));
                     Collections.sort(getDictionary().get(position).getPostingList());
                 }
@@ -68,10 +67,33 @@ public class InvertedIndex {
             }
         }
     }
-    
-    public ArrayList<Posting> search (String query){
-        
+
+    public ArrayList<Posting> search(String query) {
+        makeDictionary();
+        String tempQuery[] = query.split(" ");
+        for (int i = 0; i < tempQuery.length; i++) {
+            String string = tempQuery[i];
+        }
         return null;
+    }
+
+    public ArrayList<Posting> intersection(ArrayList<Posting> p1, ArrayList<Posting> p2) {
+        return null;
+    }
+
+    public ArrayList<Posting> searchOneWord(String word) {
+        Term tempTerm = new Term(word);
+        if (getDictionary().isEmpty()) {
+            return null;
+        } else {
+            int positionTerm = Collections.binarySearch(dictionary, tempTerm);
+            if (positionTerm < 0) {
+                return null;
+            } else {
+                return dictionary.get(positionTerm).getPostingList();
+            }
+        }
+
     }
 
     /**

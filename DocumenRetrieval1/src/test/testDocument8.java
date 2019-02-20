@@ -15,7 +15,7 @@ import model.Term;
  *
  * @author admin
  */
-public class testDocument7 {
+public class testDocument8 {
 
     public static void main(String[] args) {
         Document doc1 = new Document(1, "computer information retrieval");
@@ -29,19 +29,13 @@ public class testDocument7 {
 
         index.makeDictionary();
         ArrayList<Posting> result = index.searchOneWord("computer");
+        ArrayList<Posting> result1 = index.searchOneWord("architecture");
+        ArrayList<Posting> join = index.intersection(result1, result);
 
-        for (int i = 0; i < result.size(); i++) {
-            System.out.println("idDoc = " + result.get(i).getDocument().getId());
-            System.out.println(result.get(i).getDocument().getContent());
-            System.out.println("");
+        for (int i = 0; i < join.size(); i++) {
+            System.out.println("idDoc = " + join.get(i).getDocument().getId());
+            System.out.println(join.get(i).getDocument().getContent());
         }
-
-//        ArrayList<Posting> result1 = index.searchOneWord("machine organization");
-//
-//        for (int i = 0; i < result1.size(); i++) {
-//            System.out.println("idDoc = " + result1.get(i).getDocument().getId());
-//            System.out.println(result1.get(i).getDocument().getContent());
-//        }
         //test git
     }
 }
