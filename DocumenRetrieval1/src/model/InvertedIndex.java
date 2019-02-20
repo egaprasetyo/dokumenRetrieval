@@ -21,16 +21,17 @@ public class InvertedIndex {
     }
 
     public void addNewDocument(Document document) {
-        listofDocument.add(document);
+        getListofDocument().add(document);
     }
+    
 
     public ArrayList<Posting> getUnsortedPostingList() {
         ArrayList<Posting> list = new ArrayList<Posting>();
 
-        for (int i = 0; i < listofDocument.size(); i++) {
-            String[] termResult = listofDocument.get(i).getListofTerm();
+        for (int i = 0; i < getListofDocument().size(); i++) {
+            String[] termResult = getListofDocument().get(i).getListofTerm();
             for (int j = 0; j < termResult.length; j++) {
-                Posting tempPosting = new Posting(listofDocument.get(i), termResult[j]);
+                Posting tempPosting = new Posting(getListofDocument().get(i), termResult[j]);
                 list.add(tempPosting);
             }
         }
@@ -45,6 +46,59 @@ public class InvertedIndex {
     }
 
     public void makeDictionary() {
+        ArrayList<Posting> list = getSortedPostingList();
+        for (int i = 0; i < list.size(); i++) {
+            if(getDictionary().isEmpty()){
+                Term term = new Term(list.get(i).getTerm());
+                term.getPostingList().add(list.get(i));
+                getDictionary().add(term);
+            } else{
+                Term tempTerm = new Term(list.get(i).getTerm());
+                int position = Collections.binarySearch(getDictionary(), tempTerm); //keluar berupa index posisinya
+                //kalo hasil position -1 maka tidak ada
+                if(position < 0){
+                    //term baru
+                    tempTerm.getPostingList().add(list.get(i));
+                    getDictionary().add(tempTerm);
+                } else{
+                    getDictionary().get(position).getPostingList().add(list.get(i));
+                    Collections.sort(getDictionary().get(position).getPostingList());
+                }
+                Collections.sort(getDictionary());
+            }
+        }
+    }
+    
+    public ArrayList<Posting> search (String query){
         
+        return null;
+    }
+
+    /**
+     * @return the listofDocument
+     */
+    public ArrayList<Document> getListofDocument() {
+        return listofDocument;
+    }
+
+    /**
+     * @param listofDocument the listofDocument to set
+     */
+    public void setListofDocument(ArrayList<Document> listofDocument) {
+        this.listofDocument = listofDocument;
+    }
+
+    /**
+     * @return the dictionary
+     */
+    public ArrayList<Term> getDictionary() {
+        return dictionary;
+    }
+
+    /**
+     * @param dictionary the dictionary to set
+     */
+    public void setDictionary(ArrayList<Term> dictionary) {
+        this.dictionary = dictionary;
     }
 }
