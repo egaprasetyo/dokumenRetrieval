@@ -13,6 +13,7 @@ public class Posting implements Comparable<Posting> {
 
     private Document document;
     private String term;
+    private int numberOfTerm = 1;
 
     public Posting() {
     }
@@ -57,5 +58,19 @@ public class Posting implements Comparable<Posting> {
     @Override
     public int compareTo(Posting posting) {
         return term.compareToIgnoreCase(posting.getTerm());
+    }
+
+    /**
+     * @return the numberOfTerm
+     */
+    public int getNumberOfTerm() {
+        return numberOfTerm;
+    }
+
+    /**
+     * @param numberOfTerm the numberOfTerm to set
+     */
+    public void setNumberOfTerm(int numberOfTerm) {
+        this.numberOfTerm = numberOfTerm;
     }
 }

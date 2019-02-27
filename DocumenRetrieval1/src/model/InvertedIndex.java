@@ -37,9 +37,31 @@ public class InvertedIndex {
         return list;
     }
 
+    public ArrayList<Posting> getUnsortedPostingListWithTermNumber() {
+        ArrayList<Posting> list = new ArrayList<Posting>();
+
+        for (int i = 0; i < getListofDocument().size(); i++) {
+//            String[] termResult = getListofDocument().get(i).getListofTerm();
+            ArrayList<Posting> postingDocument = getListofDocument().get(i).getListofPosting();
+            Collections.sort(postingDocument);
+            for (int j = 0; j < postingDocument.size(); j++) {
+                Posting tempPosting = postingDocument.get(j);
+                list.add(tempPosting);
+            }
+        }
+        return list;
+    }
+
     public ArrayList<Posting> getSortedPostingList() {
         ArrayList<Posting> list = new ArrayList<Posting>();
         list = this.getUnsortedPostingList();
+        Collections.sort(list);
+        return list;
+    }
+
+    public ArrayList<Posting> getSortedPostingListWithNumberTerm() {
+        ArrayList<Posting> list = new ArrayList<Posting>();
+        list = this.getUnsortedPostingListWithTermNumber();
         Collections.sort(list);
         return list;
     }
@@ -68,16 +90,52 @@ public class InvertedIndex {
         }
     }
 
-    public ArrayList<Posting> search(String query) {
-        makeDictionary();
-        String tempQuery[] = query.split(" ");
-        for (int i = 0; i < tempQuery.length; i++) {
-            String string = tempQuery[i];
+    public void makeDictionaryWithTermNumber() {
+        ArrayList<Posting> list = getSortedPostingListWithNumberTerm();
+        for (int i = 0; i < list.size(); i++) {
+            if (getDictionary().isEmpty()) {
+                Term term = new Term(list.get(i).getTerm());
+                term.getPostingList().add(list.get(i));
+                getDictionary().add(term);
+            } else {
+                Term tempTerm = new Term(list.get(i).getTerm());
+                int position = Collections.binarySearch(getDictionary(), tempTerm); //keluar berupa index posisinya
+                //kalo hasil position -1 maka tidak ada
+                if (position < 0) {
+                    //term baru
+                    tempTerm.getPostingList().add(list.get(i));
+                    getDictionary().add(tempTerm);
+                } else {
+                    getDictionary().get(position).getPostingList().add(list.get(i));
+                    Collections.sort(getDictionary().get(position).getPostingList());
+                }
+                Collections.sort(getDictionary());
+            }
         }
-        return null;
     }
 
-    public ArrayList<Posting> intersection(ArrayList<Posting> p1, ArrayList<Posting> p2) {
+    public ArrayList<Posting> search(String query) {
+        // buat index/dictionary
+//        makeDictionary();
+        String tempQuery[] = query.split(" ");
+        ArrayList<Posting> result = new ArrayList<Posting>();
+        for (int i = 0; i < tempQuery.length; i++) {
+            String string = tempQuery[i];
+            if (i == 0) {
+                result = searchOneWord(string);
+            } else {
+                ArrayList<Posting> result1 = searchOneWord(string);
+                result = intersection(result, result1);
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<Posting> intersection(ArrayList<Posting> p1,
+            ArrayList<Posting> p2) {
+        if (p1 == null || p2 == null) {
+            return new ArrayList<>();
+        }
 
         ArrayList<Posting> postings = new ArrayList<>();
         int p1Index = 0;
@@ -88,35 +146,50 @@ public class InvertedIndex {
 
         while (true) {
             if (post1.getDocument().getId() == post2.getDocument().getId()) {
-                postings.add(post1);
-                p1Index++;
-                p2Index++;
-                post1 = p1.get(p1Index);
+                try {
+                    postings.add(post1);
+                    p1Index++;
+                    p2Index++;
+                    post1 = p1.get(p1Index);
+                    post2 = p2.get(p2Index);
+                } catch (Exception e) {
+                    break;
+                }
+
             } else if (post1.getDocument().getId() < post2.getDocument().getId()) {
-                p1Index++;
-                post1 = p1.get(p1Index);
+                try {
+                    p1Index++;
+                    post1 = p1.get(p1Index);
+                } catch (Exception e) {
+                    break;
+                }
 
             } else {
-                p2Index++;
-                post2 = p2.get(p2Index);
+                try {
+                    p2Index++;
+                    post2 = p2.get(p2Index);
+                } catch (Exception e) {
+                    break;
+                }
             }
-            return postings;
         }
+        return postings;
     }
 
     public ArrayList<Posting> searchOneWord(String word) {
         Term tempTerm = new Term(word);
         if (getDictionary().isEmpty()) {
+            // dictionary kosong
             return null;
         } else {
             int positionTerm = Collections.binarySearch(dictionary, tempTerm);
             if (positionTerm < 0) {
+                // tidak ditemukan
                 return null;
             } else {
                 return dictionary.get(positionTerm).getPostingList();
             }
         }
-
     }
 
     /**
@@ -145,5 +218,36 @@ public class InvertedIndex {
      */
     public void setDictionary(ArrayList<Term> dictionary) {
         this.dictionary = dictionary;
+    }
+
+    /**
+     * Fungsi mencari frequensi sebuah term dalam sebuah index
+     *
+     * @param term
+     * @return
+     */
+    public int getDocumentFrequency(String term) {
+        return 0;
+    }
+
+    /**
+     * Fungsi untuk mencari inverse term dari sebuah index
+     *
+     * @param term
+     * @return
+     */
+    public double getInverseDocumentFrequency(String term) {
+        return 0.0;
+    }
+
+    /**
+     * Fungsi untuk mencari term frequency
+     *
+     * @param term
+     * @param idDocument
+     * @return
+     */
+    public int getTermFrequency(String term, int idDocument) {
+        return 0;
     }
 }
