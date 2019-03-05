@@ -227,7 +227,14 @@ public class InvertedIndex {
      * @return
      */
     public int getDocumentFrequency(String term) {
-        return 0;
+        Term tempTerm = new Term(term);
+        int index = Collections.binarySearch(dictionary, tempTerm);
+        if (index > 0) {
+            ArrayList<Posting> tempPosting = dictionary.get(index).getPostingList();
+            return tempPosting.size();
+        } else {
+            return -1;
+        }
     }
 
     /**
@@ -237,7 +244,15 @@ public class InvertedIndex {
      * @return
      */
     public double getInverseDocumentFrequency(String term) {
-        return 0.0;
+        Term tempTerm = new Term(term);
+        int index = Collections.binarySearch(dictionary, tempTerm);
+        if (index > 0) {
+            int N = listofDocument.size();
+            int ni = getDocumentFrequency(term);
+            return Math.log10(N / ni);
+        } else {
+            return 0.0;
+        }
     }
 
     /**
@@ -248,6 +263,29 @@ public class InvertedIndex {
      * @return
      */
     public int getTermFrequency(String term, int idDocument) {
+        Document document = new Document();
+        document.setId(idDocument);
+        int pos = Collections.binarySearch(listofDocument, document);
+        if (pos >= 0) {
+            ArrayList<Posting> tempPosting = listofDocument.get(pos).getListofPosting();
+            Posting posting = new Posting();
+            posting.setTerm(term);
+            int postingIndex = Collections.binarySearch(tempPosting, posting);
+            if (postingIndex >= 0) {
+                return tempPosting.get(postingIndex).getNumberOfTerm();
+            }
+            return 0;
+        }
+
         return 0;
+    }
+
+    /**
+     * Fungsi untuk menghitung TF-IDF dari sebuah dokumen
+     *
+     * @param idDocument
+     */
+    public ArrayList<Posting> makeTFIDF(int idDocument) {
+        return null;
     }
 }

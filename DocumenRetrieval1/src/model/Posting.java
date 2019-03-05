@@ -14,6 +14,7 @@ public class Posting implements Comparable<Posting> {
     private Document document;
     private String term;
     private int numberOfTerm = 1;
+    private double weight=0.0; // nilai TF-IDF
 
     public Posting() {
     }
@@ -73,4 +74,20 @@ public class Posting implements Comparable<Posting> {
     public void setNumberOfTerm(int numberOfTerm) {
         this.numberOfTerm = numberOfTerm;
     }
+
+    /**
+     * @return the weight
+     */
+    public double getWeight() {
+        return weight;
+    }
+
+    /**
+     * @param weight the weight to set
+     */
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+    
+    
 }
