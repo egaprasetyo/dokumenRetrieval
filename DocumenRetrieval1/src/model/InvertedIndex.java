@@ -342,4 +342,16 @@ public class InvertedIndex {
 
         return result;
     }
+    
+    public double getConsineSimilarity(ArrayList <Posting> posting, ArrayList<Posting> posting1){
+        return 0;
+    }
+    
+    public ArrayList<Document> searchTFIDF (String query){
+        return null;
+    }
+    
+    public ArrayList<Document> searchCosineSimilarity(String query){
+        return null;
+    }
 }
