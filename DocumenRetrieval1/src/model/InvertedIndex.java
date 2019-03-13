@@ -314,9 +314,9 @@ public class InvertedIndex {
     public double getInnerProduct(ArrayList<Posting> p1, ArrayList<Posting> p2) {
         double result = 0;
         for (int i = 0; i < p1.size(); i++) {
-            int pos = Collections.binarySearch(p2, p1.get(i));
-            if (pos >= 0) {
-                result = result + (p1.get(i).getWeight() * p2.get(pos).getWeight());
+            int index = Collections.binarySearch(p2, p1.get(i));
+            if (index >= 0) {
+                result = result + (p1.get(i).getWeight() * p2.get(index).getWeight());
             }
         }
 
