@@ -12,22 +12,16 @@ import java.util.ArrayList;
  * @author admin
  */
 public class Term implements Comparable<Term>{
-
     private String term;
     private ArrayList<Posting> postingList = new ArrayList<Posting>();
-
-    public Term() {
-    }
 
     public Term(String term) {
         this.term = term;
     }
 
-    
-    public int getNumberofDocument() {
+    public int getNumberOfDocument(){
         return postingList.size();
     }
-
     /**
      * @return the term
      */
@@ -60,4 +54,7 @@ public class Term implements Comparable<Term>{
     public int compareTo(Term o) {
         return term.compareToIgnoreCase(o.getTerm());
     }
+
+    
+    
 }
