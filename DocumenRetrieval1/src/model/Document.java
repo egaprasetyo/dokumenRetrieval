@@ -5,6 +5,10 @@
  */
 package model;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -116,6 +120,23 @@ public class Document implements Comparable<Document>{
     @Override
     public int compareTo(Document doc) {
         return id-doc.getId();
+    }
+    
+    public void readFile(int idDoc, File file) {
+        try (FileReader reader = new FileReader(file);
+                BufferedReader br = new BufferedReader(reader)) {
+
+            // read line by line
+            String line;
+            while ((line = br.readLine()) != null) {
+//                System.out.println(line);
+                setContent(line);
+                setId(idDoc);
+            }
+
+        } catch (IOException e) {
+            System.err.format("IOException: %s%n", e);
+        }
     }
 
 }

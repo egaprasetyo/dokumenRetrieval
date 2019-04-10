@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -528,6 +529,10 @@ public class InvertedIndex {
             result.add(new SearchingResult(sim, listOfDocument.get(i)));
         }
         return result;
+    }
+    
+    public void readDirectory(File directory){
+        
     }
 
 }
