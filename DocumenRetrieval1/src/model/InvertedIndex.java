@@ -510,6 +510,7 @@ public class InvertedIndex {
             double sim = getInnerProduct(que, doc);
             result.add(new SearchingResult(sim, listOfDocument.get(i)));
         }
+        Collections.sort(result, Collections.reverseOrder());
         return result;
     }
 
@@ -528,6 +529,7 @@ public class InvertedIndex {
             double sim = getCosineSimilarity(que, doc);
             result.add(new SearchingResult(sim, listOfDocument.get(i)));
         }
+        Collections.sort(result, Collections.reverseOrder());
         return result;
     }
     
