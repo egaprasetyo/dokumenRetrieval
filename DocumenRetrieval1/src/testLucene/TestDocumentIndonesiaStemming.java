@@ -13,5 +13,13 @@ import model.Document;
  */
 public class TestDocumentIndonesiaStemming {
 
- 
+    public static void main(String[] args) {
+        Document doc = new Document(1, "Dia sedang pergi berbelanja di pusat perbelanjaan");
+        System.out.println("Without Stemming");
+        System.out.println(doc);
+        System.out.println("With stemming");
+        doc.indonesiaStemming();
+        System.out.println(doc);
+    }
+
 }

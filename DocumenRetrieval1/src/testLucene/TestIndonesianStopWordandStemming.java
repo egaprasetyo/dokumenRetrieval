@@ -15,6 +15,7 @@ import org.apache.lucene.analysis.id.IndonesianAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.util.Version;
+
 /**
  *
  * @author admin
@@ -22,9 +23,9 @@ import org.apache.lucene.util.Version;
 public class TestIndonesianStopWordandStemming {
 
     public static void main(String[] args) {
-       String text = "Dia sedang pergi berbelanja di pusat perbelanjaan. "
+        String text = "Dia sedang pergi berbelanja di pusat perbelanjaan. "
                 + "Namun, ibunya melarangnya pergi kesana karena tempat itu sangat berbahaya.";
-        System.out.println("Text = "+text);
+        System.out.println("Text = " + text);
         Version matchVersion = Version.LUCENE_7_7_0; // Substitute desired Lucene version for XY
         Analyzer analyzer = new IndonesianAnalyzer();
         analyzer.setVersion(matchVersion);
@@ -49,7 +50,7 @@ public class TestIndonesianStopWordandStemming {
             System.out.println("Exception: " + ex);
         }
         String newText = sb.toString();
-        System.out.println("New Text = "+newText);
+        System.out.println("New Text = " + newText);
 
     }
 }

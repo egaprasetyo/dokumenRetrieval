@@ -6,6 +6,7 @@
 package test;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import model.Document;
 import model.InvertedIndex;
@@ -15,15 +16,16 @@ import model.InvertedIndex;
  * @author admin
  */
 public class testFileDokumen2 {
-    public static void main(String[] args) {
-        File dir = new File("folderDoc");
+    public static void main(String[] args) throws IOException {
+        final File dir = new File("folderDoc");
         InvertedIndex index = new InvertedIndex();
         index.readDirectory(dir);
         ArrayList<Document> listDoc = index.getListOfDocument();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < listDoc.size(); i++) {
             Document doc = listDoc.get(i);
             System.out.println("Content : " + doc.getId());
             System.out.println(doc.getContent());
+            System.out.println("");
         }
     }
 }
