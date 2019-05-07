@@ -230,19 +230,17 @@ public class Document implements Comparable<Document> {
         }
         content = sb.toString();
     }
-    
-    public void indonesiaStemming(){
-        // asumsi content sudah ada
-        String text = content;
+
+    public void IndonesiaStemming() {
         Version matchVersion = Version.LUCENE_7_7_0; // Substitute desired Lucene version for XY
-        Analyzer analyzer = new StandardAnalyzer();
+        Analyzer analyzer = new IndonesianAnalyzer();
         analyzer.setVersion(matchVersion);
         // ambil stopwords
         CharArraySet stopWords = IndonesianAnalyzer.getDefaultStopSet();
         // buat token
         TokenStream tokenStream = analyzer.tokenStream(
                 "myField",
-                new StringReader(text.trim()));
+                new StringReader(realContent.trim()));
         // buang stop word
         tokenStream = new StopFilter(tokenStream, stopWords);
         // buat string baru tanpa stopword
