@@ -20,6 +20,7 @@ public class testFileDokumen2 {
         final File dir = new File("folderDoc");
         InvertedIndex index = new InvertedIndex();
         index.readDirectory(dir);
+        
         ArrayList<Document> listDoc = index.getListOfDocument();
         for (int i = 0; i < listDoc.size(); i++) {
             Document doc = listDoc.get(i);

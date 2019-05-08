@@ -548,14 +548,18 @@ public class InvertedIndex {
 //                    System.out.println("read file " + file.getCanonicalPath());
                     try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                         String strLine;
+                        String AllContent = "";
                         // Read lines from the file, returns null when end of stream 
                         // is reached                    
                         while ((strLine = br.readLine()) != null) {
-                            Document doc = new Document(i, strLine);
-                            listOfDocument.add(doc);       
+                            AllContent += strLine;
+//                            Document doc = new Document(i, strLine);
+//                            listOfDocument.add(doc);
 //                            System.out.println(strLine);
 //                            System.out.println("");
                         }
+                        Document doc = new Document(i, AllContent);
+                        listOfDocument.add(doc);
                         makeDictionary();
                     }
                 } catch (IOException e) {
@@ -563,6 +567,6 @@ public class InvertedIndex {
                 }
             }
             i++;
-        }   
+        }
     }
 }

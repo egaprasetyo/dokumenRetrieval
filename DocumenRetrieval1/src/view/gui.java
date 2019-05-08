@@ -367,6 +367,7 @@ public class gui extends javax.swing.JFrame {
     private void search_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_btnActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String query = search_fieldtext.getText();
+        
         ArrayList<SearchingResult> hasilCari2 = index.searchCosineSimilarity(query);
         Object rowData[] = new Object[3];
         for (int i = 0; i < hasilCari2.size(); i++) {
