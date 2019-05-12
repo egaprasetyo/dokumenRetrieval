@@ -552,7 +552,7 @@ public class InvertedIndex {
                         // Read lines from the file, returns null when end of stream 
                         // is reached                    
                         while ((strLine = br.readLine()) != null) {
-                            AllContent += strLine;
+                            AllContent += strLine + " \n";
 //                            Document doc = new Document(i, strLine);
 //                            listOfDocument.add(doc);
 //                            System.out.println(strLine);
