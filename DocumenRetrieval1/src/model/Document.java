@@ -42,6 +42,7 @@ public class Document implements Comparable<Document> {
 
     public Document(String content) {
         this.content = content;
+        this.realContent = content;
     }
 
     public Document(int id, String content) {

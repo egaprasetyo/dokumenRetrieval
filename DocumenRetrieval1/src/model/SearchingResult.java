@@ -50,6 +50,6 @@ public class SearchingResult implements Comparable<SearchingResult> {
 
     @Override
     public int compareTo(SearchingResult result) {
-        return Double.compare(similarity, result.getSimilarity());
+        return Double.compare(result.getSimilarity(), similarity);
     }
 }

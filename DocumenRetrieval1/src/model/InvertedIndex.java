@@ -224,6 +224,7 @@ public class InvertedIndex {
     }
 
     public void makeDictionaryWithTermNumber() {
+        getDictionary().clear();
         // cek deteksi ada term yang frekuensinya lebih dari 
         // 1 pada sebuah dokumen
         // buat posting list term terurut
@@ -566,7 +567,7 @@ public class InvertedIndex {
             }
         }
         // urutkan hasil cari
-        Collections.sort(result, Collections.reverseOrder());
+        Collections.sort(result);
         return result;
     }
 
@@ -611,7 +612,7 @@ public class InvertedIndex {
             }
         }
         // urutkan hasil cari
-        Collections.sort(result, Collections.reverseOrder());
+        Collections.sort(result);
         return result;
     }
 
