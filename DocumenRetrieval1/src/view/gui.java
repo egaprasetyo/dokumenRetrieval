@@ -27,7 +27,8 @@ public class gui extends javax.swing.JFrame {
      */
     InvertedIndex index = new InvertedIndex();
     Document doc = new Document();
-
+    File file;
+    
     public gui() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -297,7 +298,7 @@ public class gui extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id Document", "Content", "Cosine Similarity"
+                "id Document", "Content", "Cosine Simililarity"
             }
         ));
         jTable1.setGridColor(new java.awt.Color(255, 255, 255));
@@ -311,26 +312,27 @@ public class gui extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 55)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 153, 153));
-        jLabel5.setText("Searching");
+        jLabel5.setText("Searching.");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(102, Short.MAX_VALUE)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(search_fieldtext, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(search_fieldtext, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(86, 86, 86))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(search_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(297, 297, 297))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGap(208, 208, 208))))
+                        .addGap(208, 208, 208))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,8 +453,8 @@ public class gui extends javax.swing.JFrame {
 //            System.out.println("getSelectedFile() : " + fileChooser.getSelectedFile());
 
             String directory = fileChooser.getName(fileChooser.getSelectedFile());
-            File dir = new File(directory);
-            index.readDirectory(dir);
+            File file = new File(directory);
+            index.readDirectory(file);
             ArrayList<Document> listDoc = index.getListOfDocument();
             String result = "";
             for (int i = 0; i < listDoc.size(); i++) {
