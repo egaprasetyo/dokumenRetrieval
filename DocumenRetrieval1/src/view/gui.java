@@ -5,11 +5,12 @@
  */
 package view;
 
-
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import model.Document;
 import model.InvertedIndex;
 import model.SearchingResult;
@@ -24,6 +25,7 @@ public class gui extends javax.swing.JFrame {
      * Creates new form gui
      */
     InvertedIndex index = new InvertedIndex();
+    Document doc = new Document();
 
     public gui() {
         initComponents();
@@ -57,7 +59,11 @@ public class gui extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         content_textArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         fileChooser = new javax.swing.JFileChooser();
+        jDialog_showDetail = new javax.swing.JDialog();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextArea_showDetail = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         search_fieldtext = new javax.swing.JTextField();
         search_btn = new javax.swing.JButton();
@@ -68,6 +74,7 @@ public class gui extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         DialogApp.setMinimumSize(new java.awt.Dimension(480, 440));
@@ -196,6 +203,13 @@ public class gui extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Add Document");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -204,6 +218,7 @@ public class gui extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
                     .addComponent(jLabel7)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
@@ -219,7 +234,9 @@ public class gui extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout OpenDirLayout = new javax.swing.GroupLayout(OpenDir.getContentPane());
@@ -230,7 +247,33 @@ public class gui extends javax.swing.JFrame {
         );
         OpenDirLayout.setVerticalGroup(
             OpenDirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(OpenDirLayout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jDialog_showDetail.setMinimumSize(new java.awt.Dimension(520, 500));
+        jDialog_showDetail.setPreferredSize(new java.awt.Dimension(520, 500));
+
+        jTextArea_showDetail.setColumns(20);
+        jTextArea_showDetail.setRows(5);
+        jScrollPane4.setViewportView(jTextArea_showDetail);
+
+        javax.swing.GroupLayout jDialog_showDetailLayout = new javax.swing.GroupLayout(jDialog_showDetail.getContentPane());
+        jDialog_showDetail.getContentPane().setLayout(jDialog_showDetailLayout);
+        jDialog_showDetailLayout.setHorizontalGroup(
+            jDialog_showDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_showDetailLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+        jDialog_showDetailLayout.setVerticalGroup(
+            jDialog_showDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_showDetailLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -259,6 +302,11 @@ public class gui extends javax.swing.JFrame {
         ));
         jTable1.setGridColor(new java.awt.Color(255, 255, 255));
         jTable1.setRowHeight(30);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 55)); // NOI18N
@@ -321,6 +369,9 @@ public class gui extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
+        jMenuItem4.setText("Add Document");
+        jMenu1.add(jMenuItem4);
+
         jMenuItem2.setText("Exit");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -359,7 +410,7 @@ public class gui extends javax.swing.JFrame {
         int id = Integer.parseInt(idDoc_textField.getText());
         String content = content_textArea.getText();
 
-        Document doc = new Document(id, content);
+        doc = new Document(id, content);
         index.addNewDocument(doc);
         index.makeDictionaryWithTermNumber();
     }//GEN-LAST:event_saveNewDoc_btnActionPerformed
@@ -367,15 +418,28 @@ public class gui extends javax.swing.JFrame {
     private void search_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_btnActionPerformed
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         String query = search_fieldtext.getText();
-        
+
         ArrayList<SearchingResult> hasilCari2 = index.searchCosineSimilarity(query);
         Object rowData[] = new Object[3];
-        for (int i = 0; i < hasilCari2.size(); i++) {
-            SearchingResult doc = hasilCari2.get(i);
-            rowData[0] = doc.getDocument().getId();
-            rowData[1] = doc.getDocument().getContent();
-            rowData[2] = doc.getSimilarity();
-            model.addRow(rowData);
+
+        if (model == null) {
+            for (int i = 0; i < hasilCari2.size(); i++) {
+                SearchingResult document = hasilCari2.get(i);
+                rowData[0] = document.getDocument().getId();
+                rowData[1] = document.getDocument().getContent();
+                rowData[2] = document.getSimilarity();
+                model.addRow(rowData);
+            }
+        } else {
+            model.getDataVector().removeAllElements();
+            model.fireTableDataChanged();
+            for (int i = 0; i < hasilCari2.size(); i++) {
+                SearchingResult document = hasilCari2.get(i);
+                rowData[0] = document.getDocument().getId();
+                rowData[1] = document.getDocument().getContent();
+                rowData[2] = document.getSimilarity();
+                model.addRow(rowData);
+            }
         }
     }//GEN-LAST:event_search_btnActionPerformed
 
@@ -395,7 +459,7 @@ public class gui extends javax.swing.JFrame {
             ArrayList<Document> listDoc = index.getListOfDocument();
             String result = "";
             for (int i = 0; i < listDoc.size(); i++) {
-                Document doc = listDoc.get(i);
+                doc = listDoc.get(i);
                 result += "Content id : " + doc.getId() + "\n" + doc.getContent() + "\n\n";
             }
             content_textArea1.setText(result);
@@ -411,6 +475,18 @@ public class gui extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         OpenDir.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int index = jTable1.getSelectedRow();
+        TableModel model = jTable1.getModel();
+
+        jDialog_showDetail.setVisible(true);
+        jTextArea_showDetail.setText(model.getValueAt(index, 1).toString());
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -456,6 +532,8 @@ public class gui extends javax.swing.JFrame {
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JTextField idDoc_textField;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JDialog jDialog_showDetail;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -467,6 +545,7 @@ public class gui extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -475,7 +554,9 @@ public class gui extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea_showDetail;
     private javax.swing.JButton saveNewDoc_btn;
     private javax.swing.JButton search_btn;
     private javax.swing.JTextField search_fieldtext;
