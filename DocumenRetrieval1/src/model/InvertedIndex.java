@@ -569,4 +569,24 @@ public class InvertedIndex {
             i++;
         }
     }
+
+    public void readFileTXT(File file) {
+        try (FileReader reader = new FileReader(file);
+                BufferedReader br = new BufferedReader(reader)) {
+
+            // read line by line
+            String line;
+            String AllContent = "";
+            while ((line = br.readLine()) != null) {
+//                System.out.println(line);
+                AllContent += line + " \n";
+            }
+            Document doc = new Document(listOfDocument.size() + 1, AllContent);
+            listOfDocument.add(doc);
+            makeDictionary();
+
+        } catch (IOException e) {
+            System.err.format("IOException: %s%n", e);
+        }
+    }
 }

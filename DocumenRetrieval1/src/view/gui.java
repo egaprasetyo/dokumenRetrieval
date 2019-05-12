@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import model.Document;
@@ -74,7 +75,6 @@ public class gui extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         DialogApp.setMinimumSize(new java.awt.Dimension(480, 440));
@@ -165,7 +165,7 @@ public class gui extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        OpenDir.setMinimumSize(new java.awt.Dimension(480, 440));
+        OpenDir.setMinimumSize(new java.awt.Dimension(484, 470));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -369,9 +369,6 @@ public class gui extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
-        jMenuItem4.setText("Add Document");
-        jMenu1.add(jMenuItem4);
-
         jMenuItem2.setText("Exit");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -485,7 +482,29 @@ public class gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+        fileChooser.setDialogTitle("Pilih hanya Directory");
+        fileChooser.setCurrentDirectory(new java.io.File("."));
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+        fileChooser.setFileFilter(filter);
+        File file;
+
+        if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+//            System.out.println("getCurrentDirectory(): " + fileChooser.getCurrentDirectory());
+//            System.out.println("getSelectedFile() : " + fileChooser.getSelectedFile());
+
+            file = fileChooser.getSelectedFile();
+            index.readFileTXT(file);
+            ArrayList<Document> listDoc = index.getListOfDocument();
+            String result = "";
+            for (int i = 0; i < listDoc.size(); i++) {
+                doc = listDoc.get(i);
+                result += "Content id : " + doc.getId() + "\n" + doc.getContent() + "\n\n";
+            }
+            content_textArea1.setText(result);
+        } else {
+            System.out.println("No Selection");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -545,7 +564,6 @@ public class gui extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
