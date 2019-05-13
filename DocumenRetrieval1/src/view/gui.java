@@ -6,6 +6,7 @@
 package view;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -255,7 +256,6 @@ public class gui extends javax.swing.JFrame {
         );
 
         jDialog_showDetail.setMinimumSize(new java.awt.Dimension(520, 500));
-        jDialog_showDetail.setPreferredSize(new java.awt.Dimension(520, 500));
 
         jTextArea_showDetail.setColumns(20);
         jTextArea_showDetail.setRows(5);
@@ -299,7 +299,7 @@ public class gui extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id Document", "Content", "Cosine Simililarity"
+                "id Doc", "Content", "Cosine Simililarity", "Judul"
             }
         ));
         jTable1.setGridColor(new java.awt.Color(255, 255, 255));
@@ -310,6 +310,11 @@ public class gui extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setMinWidth(60);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(60);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(60);
+        }
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 55)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 153, 153));
@@ -439,6 +444,23 @@ public class gui extends javax.swing.JFrame {
             rowData[2] = document.getSimilarity();
             model.addRow(rowData);
         }
+        readJudul();
+    }
+
+    public void readJudul() {
+        //List text files only
+        System.out.println("\n------------Text files------------");
+        File[] files = file.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.endsWith(".txt");
+            }
+        });
+        
+        for (File file : files) {
+            System.out.println(file.getName());
+        }
+
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
