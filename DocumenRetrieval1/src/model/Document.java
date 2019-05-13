@@ -32,7 +32,8 @@ public class Document implements Comparable<Document> {
     private int id;
     private String content;
     private String realContent; // atribut content asli
-
+    private String judul;
+    
     public Document() {
     }
 
@@ -50,7 +51,22 @@ public class Document implements Comparable<Document> {
         this.content = content;
         this.realContent = content;
     }
+    
+    public Document(int id, String content, String judul) {
+        this.id = id;
+        this.content = content;
+        this.judul = judul;
+    }
 
+    public String getJudul() {
+        return judul;
+    }
+
+    public void setJudul(String judul) {
+        this.judul = judul;
+    }
+
+    
     /**
      * @return the content
      */

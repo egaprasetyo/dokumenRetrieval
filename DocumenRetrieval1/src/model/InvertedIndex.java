@@ -490,7 +490,7 @@ public class InvertedIndex {
             result = result + weight;
         }
         // keluarkan akar kuadrat
-        return result;
+        return (result);
     }
 
     public double getCosineSimilarity(ArrayList<Posting> posting, ArrayList<Posting> posting1) {
@@ -590,9 +590,8 @@ public class InvertedIndex {
                         while ((strLine = br.readLine()) != null) {
                             AllContent += strLine + " \n";
                         }
-                        Document doc = new Document(i, AllContent);
+                        Document doc = new Document(i, AllContent, file.getName().replace(".txt", ""));
                         listOfDocument.add(doc);
-                        makeDictionaryWithTermNumber();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -600,6 +599,7 @@ public class InvertedIndex {
             }
             i++;
         }
+        makeDictionaryWithTermNumber();
     }
 
     public void readFileTXT(File file) {
@@ -612,9 +612,9 @@ public class InvertedIndex {
             while ((line = br.readLine()) != null) {
                 AllContent += line + " \n";
             }
-            Document doc = new Document(listOfDocument.size() + 1, AllContent);
+            Document doc = new Document(listOfDocument.size() + 1, AllContent, file.getName().replace(".txt", ""));
             listOfDocument.add(doc);
-            makeDictionary();
+            makeDictionaryWithTermNumber();
 
         } catch (IOException e) {
             System.err.format("IOException: %s%n", e);

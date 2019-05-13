@@ -68,6 +68,9 @@ public class gui extends javax.swing.JFrame {
         jDialog_showDetail = new javax.swing.JDialog();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea_showDetail = new javax.swing.JTextArea();
+        jTextField_detail_judul = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         search_fieldtext = new javax.swing.JTextField();
         search_btn = new javax.swing.JButton();
@@ -168,7 +171,8 @@ public class gui extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        OpenDir.setMinimumSize(new java.awt.Dimension(484, 470));
+        OpenDir.setMinimumSize(new java.awt.Dimension(520, 611));
+        OpenDir.setPreferredSize(new java.awt.Dimension(520, 611));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -182,7 +186,7 @@ public class gui extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(336, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,27 +223,27 @@ public class gui extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
                     .addComponent(jLabel7)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(57, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(31, 31, 31)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout OpenDirLayout = new javax.swing.GroupLayout(OpenDir.getContentPane());
@@ -250,32 +254,44 @@ public class gui extends javax.swing.JFrame {
         );
         OpenDirLayout.setVerticalGroup(
             OpenDirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(OpenDirLayout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jDialog_showDetail.setMinimumSize(new java.awt.Dimension(520, 500));
+        jDialog_showDetail.setMinimumSize(new java.awt.Dimension(540, 585));
 
         jTextArea_showDetail.setColumns(20);
         jTextArea_showDetail.setRows(5);
         jScrollPane4.setViewportView(jTextArea_showDetail);
+
+        jLabel1.setText("Judul");
+
+        jLabel8.setText("Content");
 
         javax.swing.GroupLayout jDialog_showDetailLayout = new javax.swing.GroupLayout(jDialog_showDetail.getContentPane());
         jDialog_showDetail.getContentPane().setLayout(jDialog_showDetailLayout);
         jDialog_showDetailLayout.setHorizontalGroup(
             jDialog_showDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog_showDetailLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addGroup(jDialog_showDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel8)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_detail_judul, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jDialog_showDetailLayout.setVerticalGroup(
             jDialog_showDetailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog_showDetailLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog_showDetailLayout.createSequentialGroup()
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField_detail_judul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -435,32 +451,16 @@ public class gui extends javax.swing.JFrame {
     public void showTable() {
         String query = search_fieldtext.getText();
         ArrayList<SearchingResult> hasilCari2 = index.searchCosineSimilarity(query);
-        Object rowData[] = new Object[3];
+        Object rowData[] = new Object[4];
 
         for (int i = 0; i < hasilCari2.size(); i++) {
             SearchingResult document = hasilCari2.get(i);
             rowData[0] = document.getDocument().getId();
             rowData[1] = document.getDocument().getContent();
             rowData[2] = document.getSimilarity();
+            rowData[3] = document.getDocument().getJudul();
             model.addRow(rowData);
         }
-        readJudul();
-    }
-
-    public void readJudul() {
-        //List text files only
-        System.out.println("\n------------Text files------------");
-        File[] files = file.listFiles(new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.endsWith(".txt");
-            }
-        });
-        
-        for (File file : files) {
-            System.out.println(file.getName());
-        }
-
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -502,6 +502,7 @@ public class gui extends javax.swing.JFrame {
 
         jDialog_showDetail.setVisible(true);
         jTextArea_showDetail.setText(model.getValueAt(index, 1).toString());
+        jTextField_detail_judul.setText(model.getValueAt(index, 3).toString());
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -576,12 +577,14 @@ public class gui extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JDialog jDialog_showDetail;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -598,6 +601,7 @@ public class gui extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea_showDetail;
+    private javax.swing.JTextField jTextField_detail_judul;
     private javax.swing.JButton saveNewDoc_btn;
     private javax.swing.JButton search_btn;
     private javax.swing.JTextField search_fieldtext;

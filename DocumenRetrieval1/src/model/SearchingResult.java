@@ -15,9 +15,9 @@ public class SearchingResult implements Comparable<SearchingResult> {
     private double similarity;
     private Document document;
 
-    public SearchingResult(double similarity, Document document) {
+    public SearchingResult(double similarity, Document documents) {
         this.similarity = similarity;
-        this.document = document;
+        this.document = documents;
     }
 
     /**
