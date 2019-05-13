@@ -497,7 +497,7 @@ public class InvertedIndex {
             result = result + weight;
         }
         // keluarkan akar kuadrat
-        return result;
+        return (result);
     }
 
     /**
@@ -640,7 +640,7 @@ public class InvertedIndex {
                         }
                         Document doc = new Document(i, AllContent);
                         listOfDocument.add(doc);
-                        makeDictionary();
+                        makeDictionaryWithTermNumber();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

@@ -28,6 +28,7 @@ public class gui extends javax.swing.JFrame {
     InvertedIndex index = new InvertedIndex();
     Document doc = new Document();
     File file;
+    DefaultTableModel model;
     
     public gui() {
         initComponents();
@@ -415,7 +416,7 @@ public class gui extends javax.swing.JFrame {
     }//GEN-LAST:event_saveNewDoc_btnActionPerformed
 
     private void search_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_btnActionPerformed
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model = (DefaultTableModel) jTable1.getModel();
         String query = search_fieldtext.getText();
 
         ArrayList<SearchingResult> hasilCari2 = index.searchCosineSimilarity(query);
@@ -453,7 +454,7 @@ public class gui extends javax.swing.JFrame {
 //            System.out.println("getSelectedFile() : " + fileChooser.getSelectedFile());
 
             String directory = fileChooser.getName(fileChooser.getSelectedFile());
-            File file = new File(directory);
+            file = new File(directory);
             index.readDirectory(file);
             ArrayList<Document> listDoc = index.getListOfDocument();
             String result = "";
@@ -484,12 +485,12 @@ public class gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        fileChooser.setDialogTitle("Pilih hanya Directory");
+        fileChooser.setDialogTitle("Pilih hanya file txt");
         fileChooser.setCurrentDirectory(new java.io.File("."));
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
         fileChooser.setFileFilter(filter);
-        File file;
+//        File file;
 
         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
 //            System.out.println("getCurrentDirectory(): " + fileChooser.getCurrentDirectory());
