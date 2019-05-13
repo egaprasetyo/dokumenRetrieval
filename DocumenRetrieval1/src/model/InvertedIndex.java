@@ -477,13 +477,6 @@ public class InvertedIndex {
      * @param posting
      * @return
      */
-//    public double getLengthOfPosting(ArrayList<Posting> posting) {
-//        double result = 0;
-//        for (int i = 0; i < posting.size(); i++) {
-//            result = (posting.get(i).getWeight() * posting.get(i).getWeight()) + result;
-//        }
-//        return Math.sqrt(result);
-//    }
     public double getLengthOfPosting(ArrayList<Posting> posting) {
         double result = 0.0;
         for (int i = 0; i < posting.size(); i++) {
@@ -497,22 +490,9 @@ public class InvertedIndex {
             result = result + weight;
         }
         // keluarkan akar kuadrat
-        return (result);
+        return result;
     }
 
-    /**
-     * Fungsi untuk menghitung cosine similarity
-     *
-     * @param posting
-     * @param posting1
-     * @return
-     */
-//    public double getCosineSimilarity(ArrayList<Posting> posting, ArrayList<Posting> posting1) {
-//        double InnerPro = getInnerProduct(posting, posting1);
-//        double Length = getLengthOfPosting(posting1) * getLengthOfPosting(posting);
-//        double CosSim = InnerPro / Length;
-//        return CosSim;
-//    }
     public double getCosineSimilarity(ArrayList<Posting> posting, ArrayList<Posting> posting1) {
         // cari jarak antara posting dan posting 1
         double hasilDotProduct = getInnerProduct(posting, posting1);
@@ -532,18 +512,6 @@ public class InvertedIndex {
      * @param query
      * @return
      */
-//    public ArrayList<SearchingResult> searchTFIDF(String query) {
-//        ArrayList<SearchingResult> result = new ArrayList<SearchingResult>();
-//        ArrayList<Posting> que = getQueryPosting(query);
-//
-//        for (int i = 0; i < listOfDocument.size(); i++) {
-//            ArrayList<Posting> doc = makeTFIDF(listOfDocument.get(i).getId());
-//            double sim = getInnerProduct(que, doc);
-//            result.add(new SearchingResult(sim, listOfDocument.get(i)));
-//        }
-//        Collections.sort(result, Collections.reverseOrder());
-//        return result;
-//    }
     public ArrayList<SearchingResult> searchTFIDF(String query) {
         // buat list search document
         ArrayList<SearchingResult> result = new ArrayList<SearchingResult>();
@@ -577,18 +545,6 @@ public class InvertedIndex {
      * @param query
      * @return
      */
-//    public ArrayList<SearchingResult> searchCosineSimilarity(String query) {
-//        ArrayList<SearchingResult> result = new ArrayList<SearchingResult>();
-//        ArrayList<Posting> que = getQueryPosting(query);
-//
-//        for (int i = 0; i < listOfDocument.size(); i++) {
-//            ArrayList<Posting> doc = makeTFIDF(listOfDocument.get(i).getId());
-//            double sim = getCosineSimilarity(que, doc);
-//            result.add(new SearchingResult(sim, listOfDocument.get(i)));
-//        }
-//        Collections.sort(result, Collections.reverseOrder());
-//        return result;
-//    }
     public ArrayList<SearchingResult> searchCosineSimilarity(String query) {
         // buat list search document
         ArrayList<SearchingResult> result = new ArrayList<SearchingResult>();
@@ -633,10 +589,6 @@ public class InvertedIndex {
                         // is reached                    
                         while ((strLine = br.readLine()) != null) {
                             AllContent += strLine + " \n";
-//                            Document doc = new Document(i, strLine);
-//                            listOfDocument.add(doc);
-//                            System.out.println(strLine);
-//                            System.out.println("");
                         }
                         Document doc = new Document(i, AllContent);
                         listOfDocument.add(doc);
@@ -658,7 +610,6 @@ public class InvertedIndex {
             String line;
             String AllContent = "";
             while ((line = br.readLine()) != null) {
-//                System.out.println(line);
                 AllContent += line + " \n";
             }
             Document doc = new Document(listOfDocument.size() + 1, AllContent);
