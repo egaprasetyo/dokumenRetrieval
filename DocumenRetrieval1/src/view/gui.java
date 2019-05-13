@@ -29,7 +29,7 @@ public class gui extends javax.swing.JFrame {
     Document doc = new Document();
     File file;
     DefaultTableModel model;
-    
+
     public gui() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -417,31 +417,29 @@ public class gui extends javax.swing.JFrame {
 
     private void search_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_btnActionPerformed
         model = (DefaultTableModel) jTable1.getModel();
-        String query = search_fieldtext.getText();
-
-        ArrayList<SearchingResult> hasilCari2 = index.searchCosineSimilarity(query);
-        Object rowData[] = new Object[3];
 
         if (model == null) {
-            for (int i = 0; i < hasilCari2.size(); i++) {
-                SearchingResult document = hasilCari2.get(i);
-                rowData[0] = document.getDocument().getId();
-                rowData[1] = document.getDocument().getContent();
-                rowData[2] = document.getSimilarity();
-                model.addRow(rowData);
-            }
+            showTable();
         } else {
             model.getDataVector().removeAllElements();
             model.fireTableDataChanged();
-            for (int i = 0; i < hasilCari2.size(); i++) {
-                SearchingResult document = hasilCari2.get(i);
-                rowData[0] = document.getDocument().getId();
-                rowData[1] = document.getDocument().getContent();
-                rowData[2] = document.getSimilarity();
-                model.addRow(rowData);
-            }
+            showTable();
         }
     }//GEN-LAST:event_search_btnActionPerformed
+
+    public void showTable() {
+        String query = search_fieldtext.getText();
+        ArrayList<SearchingResult> hasilCari2 = index.searchCosineSimilarity(query);
+        Object rowData[] = new Object[3];
+
+        for (int i = 0; i < hasilCari2.size(); i++) {
+            SearchingResult document = hasilCari2.get(i);
+            rowData[0] = document.getDocument().getId();
+            rowData[1] = document.getDocument().getContent();
+            rowData[2] = document.getSimilarity();
+            model.addRow(rowData);
+        }
+    }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         fileChooser.setDialogTitle("Pilih hanya Directory");
