@@ -98,6 +98,7 @@ public class Document implements Comparable<Document> {
     public String[] getListofTerm() {
         String value = this.getContent();
         value = value.replaceAll("[.,?!]", "");
+//        value = value.replaceAll(" \n", " ");
         return value.split(" ");
     }
 
