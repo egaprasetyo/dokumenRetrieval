@@ -33,7 +33,9 @@ public class Document implements Comparable<Document> {
     private String content;
     private String realContent; // atribut content asli
     private String judul;
-    
+    // list posting untuk keperluan clustering document
+    private ArrayList<Posting> listOfClusteringPosting = new ArrayList<Posting>();
+
     public Document() {
     }
 
@@ -51,7 +53,7 @@ public class Document implements Comparable<Document> {
         this.content = content;
         this.realContent = content;
     }
-    
+
     public Document(int id, String content, String judul) {
         this.id = id;
         this.content = content;
@@ -66,7 +68,6 @@ public class Document implements Comparable<Document> {
         this.judul = judul;
     }
 
-    
     /**
      * @return the content
      */
@@ -157,11 +158,13 @@ public class Document implements Comparable<Document> {
 
             // read line by line
             String line;
+            String AllLine = "";
             while ((line = br.readLine()) != null) {
-//                System.out.println(line);
-                setContent(line);
-                setId(idDoc);
+                AllLine += line + " \n";
             }
+            setContent(AllLine);
+            setId(idDoc);
+            setJudul(file.getName().replace(".txt", ""));
 
         } catch (IOException e) {
             System.err.format("IOException: %s%n", e);
@@ -274,6 +277,20 @@ public class Document implements Comparable<Document> {
             System.out.println("Exception: " + ex);
         }
         content = sb.toString();
+    }
+
+    /**
+     * @return the listOfClusterinPosting
+     */
+    public ArrayList<Posting> getListOfClusteringPosting() {
+        return listOfClusteringPosting;
+    }
+
+    /**
+     * @param listOfClusteringPosting
+     */
+    public void setListOfClusteringPosting(ArrayList<Posting> listOfClusteringPosting) {
+        this.listOfClusteringPosting = listOfClusteringPosting;
     }
 
 }

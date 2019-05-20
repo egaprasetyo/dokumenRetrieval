@@ -20,6 +20,8 @@ public class InvertedIndex {
 
     private ArrayList<Document> listOfDocument = new ArrayList<Document>();
     private ArrayList<Term> dictionary = new ArrayList<Term>();
+    private ArrayList<Cluster> cluster = new ArrayList<Cluster>();
+    public static final int NUMBER_OF_DOCUMENT_CLUSTER = 2;
 
     public InvertedIndex() {
     }
@@ -580,6 +582,8 @@ public class InvertedIndex {
             if (file.isDirectory()) {
                 readDirectory(file);
             } else {
+//                Document doc = new Document();
+//                doc.readFile(i, file);
                 try {
 //                    System.out.println("read file " + file.getCanonicalPath());
                     try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -591,6 +595,7 @@ public class InvertedIndex {
                             AllContent += strLine + " \n";
                         }
                         Document doc = new Document(i, AllContent, file.getName().replace(".txt", ""));
+//                        doc.stemming();
                         listOfDocument.add(doc);
                     }
                 } catch (IOException e) {
@@ -618,6 +623,35 @@ public class InvertedIndex {
 
         } catch (IOException e) {
             System.err.format("IOException: %s%n", e);
+        }
+    }
+
+    /**
+     * @return the cluster
+     */
+    public ArrayList<Cluster> getCluster() {
+        return cluster;
+    }
+
+    /**
+     * @param cluster the cluster to set
+     */
+    public void setCluster(ArrayList<Cluster> cluster) {
+        this.cluster = cluster;
+    }
+
+    /**
+     * Fungsi penyiapan pasting dari seluruh document Asumsi document sudah di
+     * stemming
+     */
+    public void preClustering() {
+        // baca seluruh document
+        for (int i = 0; i < listOfDocument.size(); i++) {
+            // baca idDoc
+            int idDoc = listOfDocument.get(i).getId();
+            // buat posting dengan nilai TF-IDFnya
+            listOfDocument.get(i).setListOfClusteringPosting(makeTFIDF(idDoc));
+
         }
     }
 }
