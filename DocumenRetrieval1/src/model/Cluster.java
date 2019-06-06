@@ -15,8 +15,13 @@ public class Cluster {
 
     private ArrayList<Document> member = new ArrayList<Document>();
     private Document center = new Document();
+    private int idCluster;
 
     public Cluster() {
+    }
+
+    public Cluster(int idCluster) {
+        this.idCluster = idCluster;
     }
 
     /**
@@ -47,4 +52,19 @@ public class Cluster {
         this.center = center;
     }
 
+    /**
+     * @return the idCluster
+     */
+    public int getIdCluster() {
+        return idCluster;
+    }
+
+    /**
+     * @param idCluster the idCluster to set
+     */
+    public void setIdCluster(int idCluster) {
+        this.idCluster = idCluster;
+    }
+
 }
+
