@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import jdk.internal.org.jline.utils.InfoCmp;
 import model.Document;
 import model.InvertedIndex;
 import model.SearchingResult;
@@ -71,6 +72,10 @@ public class gui extends javax.swing.JFrame {
         jTextField_detail_judul = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jDialog_Cluster = new javax.swing.JDialog();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable_Cluster = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         search_fieldtext = new javax.swing.JTextField();
         search_btn = new javax.swing.JButton();
@@ -81,6 +86,7 @@ public class gui extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         DialogApp.setMinimumSize(new java.awt.Dimension(480, 440));
@@ -172,7 +178,6 @@ public class gui extends javax.swing.JFrame {
         );
 
         OpenDir.setMinimumSize(new java.awt.Dimension(520, 611));
-        OpenDir.setPreferredSize(new java.awt.Dimension(520, 611));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -294,6 +299,46 @@ public class gui extends javax.swing.JFrame {
                 .addGap(23, 23, 23))
         );
 
+        jDialog_Cluster.setMinimumSize(new java.awt.Dimension(690, 600));
+        jDialog_Cluster.setPreferredSize(new java.awt.Dimension(690, 600));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setText("Cluster");
+
+        jTable_Cluster.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID Doc", "Center", "Cluster", "Judul"
+            }
+        ));
+        jScrollPane5.setViewportView(jTable_Cluster);
+
+        javax.swing.GroupLayout jDialog_ClusterLayout = new javax.swing.GroupLayout(jDialog_Cluster.getContentPane());
+        jDialog_Cluster.getContentPane().setLayout(jDialog_ClusterLayout);
+        jDialog_ClusterLayout.setHorizontalGroup(
+            jDialog_ClusterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_ClusterLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jDialog_ClusterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        jDialog_ClusterLayout.setVerticalGroup(
+            jDialog_ClusterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_ClusterLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Searching");
 
@@ -393,6 +438,14 @@ public class gui extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
+        jMenuItem4.setText("Cluster");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+
         jMenuItem2.setText("Exit");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -470,9 +523,6 @@ public class gui extends javax.swing.JFrame {
         fileChooser.setAcceptAllFileFilterUsed(false);
 
         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-//            System.out.println("getCurrentDirectory(): " + fileChooser.getCurrentDirectory());
-//            System.out.println("getSelectedFile() : " + fileChooser.getSelectedFile());
-
             String directory = fileChooser.getName(fileChooser.getSelectedFile());
             file = new File(directory);
             index.readDirectory(file);
@@ -514,8 +564,6 @@ public class gui extends javax.swing.JFrame {
 //        File file;
 
         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-//            System.out.println("getCurrentDirectory(): " + fileChooser.getCurrentDirectory());
-//            System.out.println("getSelectedFile() : " + fileChooser.getSelectedFile());
 
             file = fileChooser.getSelectedFile();
             index.readFileTXT(file);
@@ -530,6 +578,38 @@ public class gui extends javax.swing.JFrame {
             System.out.println("No Selection");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void showTable2() {
+        Object rowData[] = new Object[4];
+
+        for (int i = 0; i < index.getListOfCluster().size(); i++) {
+            rowData[2] = i;
+            rowData[1] = index.getListOfCluster().get(i).getCenter().getId();
+//            System.out.println("cluster = " + i + ", center = " + index.getListOfCluster().get(i).getCenter().getId());
+            for (int j = 0; j < index.getListOfCluster().get(i).getMember().size(); j++) {
+                rowData[0] = index.getListOfCluster().get(i).getMember().get(j).getId();
+//                System.out.println("id dok : " + index.getListOfCluster().get(i).getMember().get(j).getId());
+                rowData[3] = index.getListOfCluster().get(i).getMember().get(j).getJudul();
+                model.addRow(rowData);
+            }
+        }
+    }
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        index.preClustering();
+        index.clustering();
+        
+        model = (DefaultTableModel) jTable_Cluster.getModel();
+
+        if (model == null) {
+            showTable2();
+        } else {
+            model.getDataVector().removeAllElements();
+            model.fireTableDataChanged();
+            showTable2();
+        }
+        jDialog_Cluster.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -576,6 +656,7 @@ public class gui extends javax.swing.JFrame {
     private javax.swing.JTextField idDoc_textField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JDialog jDialog_Cluster;
     private javax.swing.JDialog jDialog_showDetail;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -585,11 +666,13 @@ public class gui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -599,7 +682,9 @@ public class gui extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable_Cluster;
     private javax.swing.JTextArea jTextArea_showDetail;
     private javax.swing.JTextField jTextField_detail_judul;
     private javax.swing.JButton saveNewDoc_btn;

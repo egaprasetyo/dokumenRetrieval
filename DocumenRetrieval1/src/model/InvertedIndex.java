@@ -626,7 +626,7 @@ public class InvertedIndex {
         }
     }
 
-   /**
+    /**
      * @return the cluster
      */
     public ArrayList<Cluster> getListOfCluster() {
@@ -640,46 +640,45 @@ public class InvertedIndex {
         this.listOfCluster = cluster;
     }
 
-     /**
-     * Fungsi penyiapan pasting dari seluruh document
-     * Asumsi document sudah di stemming
+    /**
+     * Fungsi penyiapan pasting dari seluruh document Asumsi document sudah di
+     * stemming
      */
-   public void preClustering(){
+    public void preClustering() {
         // baca seluruh document
-        for(int i=0;i<listOfDocument.size();i++){
+        for (int i = 0; i < listOfDocument.size(); i++) {
             // baca idDoc
             int idDoc = listOfDocument.get(i).getId();
             // buat posting dengan nilai TF-IDFnya
             listOfDocument.get(i).setListOfClusteringPosting(makeTFIDF(idDoc));
-            
+
         }
     }
-   
+
     /**
      * Fungsi untuk clustering
      */
-    public void clustering(){
+    public void clustering() {
         // buat arraylistofCluster sejumlah kelompok yang sudah ditentukan
         // dan tetapkan N document awal sebagai pusat cluster
         for (int i = 0; i < NUMBER_OF_DOCUMENT_CLUSTER; i++) {
             Cluster cluster = new Cluster(i);
             cluster.setCenter(listOfDocument.get(i));
+            listOfCluster.add(cluster);
         }
-        
+
         // lalu lakukan penghitungan similarity antara dokumen 
         // dengan masing-masing center
-        
         for (int i = 0; i < listOfDocument.size(); i++) {
             // per epoch
             Document doc = listOfDocument.get(i);
             // hitung similarity
-            ArrayList<DocumentToClusterSimilarity> listOfSimilarity = 
-                    new ArrayList<DocumentToClusterSimilarity>();
-            for (int j = 0; j <listOfCluster.size(); j++) {
-                double sim = getCosineSimilarity(listOfDocument.get(i).getListOfClusteringPosting(), 
-                    listOfCluster.get(j).getCenter().getListOfClusteringPosting());
-                DocumentToClusterSimilarity simDoc = 
-                        new DocumentToClusterSimilarity(sim, listOfCluster.get(j));
+            ArrayList<DocumentToClusterSimilarity> listOfSimilarity = new ArrayList<DocumentToClusterSimilarity>();
+            for (int j = 0; j < listOfCluster.size(); j++) {
+                double sim = getCosineSimilarity(listOfDocument.get(i).getListOfClusteringPosting(),
+                        listOfCluster.get(j).getCenter().getListOfClusteringPosting());
+                DocumentToClusterSimilarity simDoc
+                        = new DocumentToClusterSimilarity(sim, listOfCluster.get(j));
                 listOfSimilarity.add(simDoc);
             }
             // sorting similarity
@@ -691,5 +690,4 @@ public class InvertedIndex {
         }
     }
 }
-
 

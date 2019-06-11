@@ -12,10 +12,9 @@ import model.Posting;
 
 /**
  *
- * @author ASUS A455L
+ * @author egaprasetyo
  */
-public class TestCluster1 {
-
+public class TestCluster2 {
     public static void main(String[] args) {
         // seting dokumen
         Document doc1 = new Document(1, "Fahri Hamzah Usul Ibu Kota Pindah ke Kepulauan Seribu");
@@ -35,18 +34,23 @@ public class TestCluster1 {
         // bikin dictionary
         index.makeDictionaryWithTermNumber();
         // bikin preclustering
-        index.preClustering();
-        
-        for (int i = 0; i < index.getListOfDocument().size(); i++) {
-            ArrayList<Posting> listPosting = index.getListOfDocument().get(i).getListOfClusteringPosting();
-            System.out.println("IdDoc = " + index.getListOfDocument().get(i).getId());
-            for (int j = 0; j < listPosting.size(); j++) {
-                System.out.println(listPosting.get(j));
-            }
+        index.clustering();
 
+        for (int i = 0; i < index.getListOfCluster().size(); i++) {
+            System.out.println("cluster = " + i + ", center = " + index.getListOfCluster().get(i).getCenter().getId());
+            for (int j = 0; j < index.getListOfCluster().get(i).getMember().size(); j++) {
+                System.out.println("id dok : " + index.getListOfCluster().get(i).getMember().get(j).getId());
+            }
         }
     }
-
+   
 }
+
+
+
+
+
+
+
 
 
