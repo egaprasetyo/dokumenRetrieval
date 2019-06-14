@@ -11,6 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 /**
  *
@@ -659,11 +660,14 @@ public class InvertedIndex {
      * Fungsi untuk clustering
      */
     public void clustering() {
+        Random random = new Random();
+        
         // buat arraylistofCluster sejumlah kelompok yang sudah ditentukan
         // dan tetapkan N document awal sebagai pusat cluster
+        
         for (int i = 0; i < NUMBER_OF_DOCUMENT_CLUSTER; i++) {
             Cluster cluster = new Cluster(i);
-            cluster.setCenter(listOfDocument.get(i));
+            cluster.setCenter(listOfDocument.get(random.nextInt(listOfDocument.size())));
             listOfCluster.add(cluster);
         }
 
@@ -690,4 +694,11 @@ public class InvertedIndex {
         }
     }
 }
+
+
+
+
+
+
+
 
